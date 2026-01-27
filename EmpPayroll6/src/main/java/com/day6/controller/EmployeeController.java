@@ -15,69 +15,45 @@ import org.springframework.web.bind.annotation.RestController;
 import com.day6.dto.EmployeeDTO;
 import com.day6.service.EmployeeService;
 
+import org.springframework.web.bind.annotation.*;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
+@RequestMapping("/emp")
 public class EmployeeController {
+
     @Autowired
     private EmployeeService employeeService;
 
-    // @PostMapping("/add")
-    // public Employee addEmployee(@RequestBody Employee employee) {
-    //     return employeeService.addEmployee(employee);
-    // }
-
-
-
-    @PostMapping("/emp/add")
+    @PostMapping("/add")
     public EmployeeDTO addEmployee(@RequestBody EmployeeDTO dto) {
+        log.info("POST /emp/add called");
         return employeeService.addEmployee(dto);
     }
 
-
-
-    // @GetMapping("/emp/{id}")
-    // public Optional<Employee> viewById(@PathVariable int id, Employee employee){
-    //     return employeeService.findyById(id);
-    // }
-
-
-    @GetMapping("/emp/{id}")
+    @GetMapping("/{id}")
     public EmployeeDTO viewById(@PathVariable int id) {
+        log.info("GET /emp/{} called", id);
         return employeeService.findById(id);
     }
 
-    // @GetMapping("/emp/all")
-    // public List<Employee> viewAll(Employee emp){
-    //     return employeeService.viewAllEmp();
-    // }
-
-    @GetMapping("/emp/all")
+    @GetMapping("/all")
     public List<EmployeeDTO> viewAll() {
+        log.info("GET /emp/all called");
         return employeeService.viewAllEmp();
     }
 
-
-
-    // @PutMapping("/emp/{id}")
-    // public Employee updateEmp(@PathVariable int id,@RequestBody Employee empl){
-    //     return employeeService.updateEmp(id, empl);
-    // }
-
-
-    @PutMapping("/emp/{id}")
+    @PutMapping("/{id}")
     public EmployeeDTO updateEmp(@PathVariable int id, @RequestBody EmployeeDTO dto) {
+        log.info("PUT /emp/{} called", id);
         return employeeService.updateEmp(id, dto);
     }
 
-
-    // @DeleteMapping("/emp/{id}")
-    // public String deleteEmp(@PathVariable int id){
-    //     return employeeService.deleteEmp(id);
-    // }
-
-
-    @DeleteMapping("/emp/{id}")
+    @DeleteMapping("/{id}")
     public String deleteEmp(@PathVariable int id) {
+        log.warn("DELETE /emp/{} called", id);
         return employeeService.deleteEmp(id);
     }
 }
