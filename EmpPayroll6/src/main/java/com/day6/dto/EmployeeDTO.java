@@ -14,12 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EmployeeDTO {
 
-
-    @NotBlank(message = "Name cannot be blank")
-    @Pattern(regexp = "^[A-Z][a-zA-Z\\\\s]{2,}$", message = "Name must contain only alphabets and spaces, First letter capitalized, minimum 3 characters")
     private String name;
-
-    @Positive(message = "Salary must be positive")
     private double salary;
 
 }
