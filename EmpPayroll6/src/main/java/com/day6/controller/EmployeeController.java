@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.day6.dto.EmployeeDTO;
 import com.day6.service.EmployeeService;
 
-import org.springframework.web.bind.annotation.*;
-
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -28,7 +28,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping("/add")
-    public EmployeeDTO addEmployee(@RequestBody EmployeeDTO dto) {
+    public EmployeeDTO addEmployee(@Valid @RequestBody EmployeeDTO dto) {
         log.info("POST /emp/add called");
         return employeeService.addEmployee(dto);
     }
@@ -46,7 +46,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public EmployeeDTO updateEmp(@PathVariable int id, @RequestBody EmployeeDTO dto) {
+    public EmployeeDTO updateEmp(@PathVariable int id, @Valid @RequestBody EmployeeDTO dto) {
         log.info("PUT /emp/{} called", id);
         return employeeService.updateEmp(id, dto);
     }
